@@ -1,0 +1,73 @@
+---
+const navItems = [
+  {
+    title: 'Inicio',
+    url: '#'
+  },
+  {
+    title: 'Proyectos',
+    url: '/#proyectos'
+  },
+  {
+    title: 'Sobre mí',
+    url: '/#sobre-mi'
+  },
+  {
+    title: 'Contacto',
+    url: '#'
+  }
+];
+---
+
+<header
+  class={`
+    flex justify-center items-center
+    mx-auto
+    sticky top-0
+    bg-transparent
+    w-full
+    z-10 h-12
+    backdrop-blur-sm
+  `}
+>
+  <nav
+    class={`
+      w-full
+      flex flex-row items-center justify-center
+    `}
+  >
+    {
+      navItems.map((link) => (
+        <a
+          class="hover:bg-white/10 rounded-full px-3 sm:px-3 transition text-lg sm:text-base text-yellow-400"
+          href={link.url}
+        >
+          {link.title}
+        </a>
+      ))
+    }
+  </nav>
+</header>
+
+<script>
+  const $navAElements: Element[] = [
+    ...document.querySelectorAll('header nav a')
+  ];
+
+  window.addEventListener('scroll', () => {
+    $navAElements.forEach((a) => {
+      const selectionForSection = a.getAttribute('href')?.substring(1);
+      const sectionElement: HTMLDivElement | null = document.querySelector(
+        selectionForSection || ''
+      );
+
+      if (!sectionElement) return;
+      const selectionTop = sectionElement.offsetTop - 150;
+      if (window.scrollY <= selectionTop) return;
+      $navAElements.forEach((aToRemove) =>
+        aToRemove.classList.remove('bg-white/15')
+      );
+      a.classList.add('bg-white/15');
+    });
+  });
+</script>
