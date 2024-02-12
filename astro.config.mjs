@@ -4,7 +4,7 @@ import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [tailwind()]
-  // site: '',
-  // base: './'
+  integrations: [tailwind()],
+  site: 'https://Jose-Orihuela-Ponce.github.io',
+  base: '/porta'
 });
